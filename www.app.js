@@ -15,11 +15,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser('secret'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-if (process.env.ENVIRONMENT == 'test') {
-  logger.remove(winston.transports.Console);
+if (process.env.FILE_LOG){
   logger.add(winston.transports.File, { filename: 'logs.log' });
-  logger.add(winston.transports.Console, { level: 'error' });
 }
+logger.remove(winston.transports.Console);
+logger.add(winston.transports.Console, { level: process.env.CONSOLE_LOGLEVEL || 'debug' });
 
 app.get('/', function(req, res) {
   logger.info('Main page');
@@ -27,7 +27,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/env', function(req, res) {
-  res.status(200).json({'API_URL':process.env.API_URL,'API_PORT':process.env.API_PORT, 'ENVIRONMENT':process.env.ENVIRONMENT});
+  res.status(200).json({'API_URL':process.env.API_URL,'API_PORT':process.env.API_PORT, 'ENVIRONMENT':process.env.NODE_ENV});
 });
 
 app.use(function(req, res, next) {
