@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser('secret'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-if (process.env.ENVIRONMENT == 'prod') {
+if (process.env.ENVIRONMENT == 'test') {
   logger.remove(winston.transports.Console);
   logger.add(winston.transports.File, { filename: 'logs.log' });
   logger.add(winston.transports.Console, { level: 'error' });
