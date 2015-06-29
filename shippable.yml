@@ -9,4 +9,4 @@ before_install:
     - node --version
 
 install:
-	- npm install
+    - npm install
