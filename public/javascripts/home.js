@@ -1,6 +1,6 @@
 var app = angular.module('radar', []);
 
-app.controller('mainCtrl', function($scope, Url_Factory, Factory) {
+app.controller('mainCtrl', function($scope, $log, env_factory, factory) {
   $scope.message = {'type':'info'};
   $scope.repo = 'shippable/support';
   $scope.accessToken = '';
@@ -9,30 +9,38 @@ app.controller('mainCtrl', function($scope, Url_Factory, Factory) {
   $scope.indexData = {};
   $scope.state = 'submit';
   $scope.loading = false;
-  Url_Factory.get()
+  $scope.log = $log;
+  $scope.env = {};
+
+  env_factory.get()
   .success(function(data) {
+    if (data.ENVIRONMENT)
+      $scope.env.environment = data.ENVIRONMENT;
     if (data.API_URL)
-      $scope.BASE_URL = data.API_URL;
+      $scope.env.api_url = data.API_URL;
     else if (data.API_PORT)
-      $scope.BASE_URL = "http://localhost:" + data.API_PORT;
+      $scope.env.api_url = "http://localhost:" + data.API_PORT;
     else
-      $scope.BASE_URL = "http://localhost:3001";
+      $scope.env.api_url = "http://localhost:3001";
+    if ($scope.env.environment == 'dev')
+      $log.info($scope.env);
   })
   .error(function(reason) {
-    console.log(reason);
+    $log.error(reason);
   });
 
   $scope.getIssues = function(state) {
     if(checkValid()){
       $scope.loading = true;
-      Factory.get($scope.BASE_URL,$scope.repo,$scope.accessToken,$scope.days,$scope.daysEnd,state)
+      factory.get($scope.env.api_url,$scope.repo,$scope.accessToken,$scope.days,$scope.daysEnd,state)
       .success(function(data) {
         checkState(data.state);
         $scope.indexData = data.indexData;
       })
       .error(function(reason) {
         $scope.loading = false;
-        console.log(reason);
+        $log.error(reason);
+        $log.error('Trying to access ' + $scope.env.api_url);
         $scope.message = {'type':'error','text':'Error! Check that you can access the API...'};
       });
     }
@@ -51,13 +59,15 @@ app.controller('mainCtrl', function($scope, Url_Factory, Factory) {
     }
     else{
       if (state == 'accessError'){
+        $log.error('Access error');
         $scope.message = {'type':'error','text':'Please check your access token!'};
       }
       else if (state == 'repoError'){
+        $log.error('Repo error');
         $scope.message = {'type':'error','text':'Invalid repo!'};
       }
       else{
-        console.log(state);
+        $log.error(state);
         $scope.message = {'type':'error','text':'Unknown error'};
       }
       $scope.state = 'submit';
@@ -83,9 +93,7 @@ app.controller('mainCtrl', function($scope, Url_Factory, Factory) {
   }
 });
 
-
-
-app.factory('Factory', function($http){
+app.factory('factory', function($http){
   return {
     get: function(url,repo,token,days,daysEnd,state) {
       return $http.get(url + 
@@ -98,7 +106,7 @@ app.factory('Factory', function($http){
   };
 });
 
-app.factory('Url_Factory', function($http){
+app.factory('env_factory', function($http){
   return {
     get: function() {
       return $http.get('/env');
