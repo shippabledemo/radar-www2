@@ -30,6 +30,12 @@ app.get('/env', function(req, res) {
   res.status(200).json({'API_URL':process.env.API_URL,'API_PORT':process.env.API_PORT, 'ENVIRONMENT':process.env.ENVIRONMENT});
 });
 
+app.use(function(req, res, next) {
+  res.status(404);
+  logger.error('Page not found');
+  res.send('Page does not exist');
+});
+
 
 var PORT = process.env.WWW_PORT || '3000';
 
