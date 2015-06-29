@@ -14,8 +14,8 @@ app.controller('mainCtrl', function($scope, $log, env_factory, factory) {
 
   env_factory.get()
   .success(function(data) {
-    if (data.ENVIRONMENT)
-      $scope.env.environment = data.ENVIRONMENT;
+    if (data.NODE_ENV)
+      $scope.env.environment = data.NODE_ENV;
     if (data.API_URL)
       $scope.env.api_url = data.API_URL;
     else if (data.API_PORT)
