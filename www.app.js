@@ -27,7 +27,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/env', function(req, res) {
-  res.status(200).json({'API_URL':process.env.API_URL,'API_PORT':process.env.API_PORT, 'ENVIRONMENT':process.env.NODE_ENV});
+  res.status(200).json({'API_URL':process.env.API_URL,'API_PORT':process.env.API_PORT, 'NODE_ENV':process.env.NODE_ENV});
 });
 
 app.use(function(req, res, next) {
