@@ -16,16 +16,16 @@
     <div class="box ng-hide" ng-show="state=='submit'">
       <div class="panel panel-body">
         <div class="separator"></div>
-         <center><h1>Github Issue Radar<span ng-if="env.environment=='dev'">-- dev mode</span></h1></center>
+         <center><h1>GitHub Issue Radar<span ng-if="env.environment=='dev'">-- dev mode</span></h1></center>
         <div class="separator"></div>
         <div>
           <div>
             <div ng-if="message.type=='error'" class="alert alert-danger text-center">{{message.text}}</div>
-            <div ng-if="message.type=='info'" class="alert alert-success text-center">Get an access token (Github -> Settings -> Personal Access Tokens) and put it below.<div class="separator"></div> Choose a repository to view, the number of days back, and either open or closed issues.</div>
+            <div ng-if="message.type=='info'" class="alert alert-success text-center">Get an access token (GitHub -> Settings -> Personal Access Tokens) and put it below.<div class="separator"></div> Choose a repository to view, the number of days back, and either open or closed issues.</div>
           </div>
           <form class="form-inline" autocomplete="off">
             <div class="span7 text-center">
-              <label for="username">Github Repo Path:</label>
+              <label for="username">GitHub Repo Path:</label>
                 <input type="text" class="form-control" name="repo" ng-model="repo">
             </div>
             <div class="separator"></div>
