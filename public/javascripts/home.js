@@ -2,7 +2,7 @@ var app = angular.module('radar', []);
 
 app.controller('mainCtrl', function($scope, $log, env_factory, factory) {
   $scope.message = {'type':'info'};
-  $scope.repo = 'shippable/support';
+  $scope.repo = 'shippable/docsv2';
   $scope.accessToken = '';
   $scope.days = 0;
   $scope.daysEnd = 5;
