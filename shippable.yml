@@ -8,5 +8,3 @@ node_js:
 before_install:
     - node --version
 
-install:
-    - npm install
