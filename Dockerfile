@@ -1,5 +1,5 @@
 # DOCKER-VERSION 1.1.2
-FROM shipimg/appbase:latest
+FROM ttrahanbeta/appbase2:v8
 
 # Bundle app source
 RUN mkdir -p /src
