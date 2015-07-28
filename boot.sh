@@ -1,5 +1,5 @@
 #!/bin/bash -x
 cd /src
 
-npm install
+#!npm install
 node www.app.js
