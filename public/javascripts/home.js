@@ -5,7 +5,7 @@ app.controller('mainCtrl', function($scope, $log, env_factory, factory) {
   $scope.repo = 'shippable/docsv2';
   $scope.accessToken = '';
   $scope.days = 0;
-  $scope.daysEnd = 3;
+  $scope.daysEnd = 5;
   $scope.indexData = {};
   $scope.state = 'submit';
   $scope.loading = false;
