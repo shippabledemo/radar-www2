@@ -2,7 +2,7 @@ var app = angular.module('radar', []);
 
 app.controller('mainCtrl', function($scope, $log, env_factory, factory) {
   $scope.message = {'type':'info'};
-  $scope.repo = 'shippable/support';
+  $scope.repo = 'shippable/docsv2';
   $scope.accessToken = '';
   $scope.days = 0;
   $scope.daysEnd = 3;
@@ -96,7 +96,7 @@ app.controller('mainCtrl', function($scope, $log, env_factory, factory) {
 app.factory('factory', function($http){
   return {
     get: function(url,repo,token,days,daysEnd,state) {
-      return $http.get(url + 
+      return $http.get(url +
         '/issues?&repo=' + repo +
         '&token=' + token +
         '&days=' + days +
