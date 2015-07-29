@@ -5,7 +5,6 @@ FROM shippabledemo/demobase:v5
 # RUN mkdir -p /src
 ADD . /src
 # Install app dependencies
-RUN cd /src; && /
-  npm link express
+RUN cd /src; npm link express
 
 ENTRYPOINT ["/src/boot.sh"]
