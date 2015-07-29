@@ -5,7 +5,7 @@ FROM shippabledemo/demobase:v5
 # RUN mkdir -p /src
 ADD . /src
 # Install app dependencies
-RUN cd /src; npm link express \
+RUN cd /src && npm link \
   grunt \
   grunt-cli \
   body-parser \
@@ -19,5 +19,6 @@ RUN cd /src; npm link express \
   request \
   sync-request \
   winston
+
 
 ENTRYPOINT ["/src/boot.sh"]
