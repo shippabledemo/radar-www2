@@ -1,5 +1,5 @@
 # DOCKER-VERSION 1.1.2
-FROM quay.io/shippabledemo/demobase:v5
+FROM shippabledemo/demobase:v5
 
 # Bundle app source
 # RUN mkdir -p /src
